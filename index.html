@@ -1,1 +1,371 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>האתר שלי - התחברות</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+        
+        .login-container h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 28px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+            text-align: right;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e1e1;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .success-message {
+            color: #27ae60;
+            margin-top: 15px;
+            font-size: 14px;
+            display: none;
+        }
+        
+        .main-content {
+            display: none;
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            width: 95%;
+            max-width: 1200px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logout-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 10px 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+        
+        .welcome-header {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 32px;
+        }
+        
+        .content-section {
+            margin: 30px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            text-align: right;
+        }
+        
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+        
+        .content-section p {
+            color: #666;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .nav-menu {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .nav-btn {
+            padding: 10px 20px;
+            background: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #5a6fd8;
+        }
+        
+        .nav-btn.active {
+            background: #764ba2;
+        }
+        
+        .page-content {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        @media (max-width: 768px) {
+            .nav-menu {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .logout-btn {
+                position: relative;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- עמוד ההתחברות -->
+    <div class="login-container" id="loginForm">
+        <h1>ברוכים הבאים לאתר</h1>
+        <form id="loginFormElement">
+            <div class="form-group">
+                <label for="username">שם משתמש:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">סיסמה:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">התחבר</button>
+            
+            <div class="error-message" id="errorMessage">
+                שם משתמש או סיסמה שגויים!
+            </div>
+            
+            <div class="success-message" id="successMessage">
+                התחברת בהצלחה! מעביר לאתר...
+            </div>
+        </form>
+    </div>
+    
+    <!-- התוכן הראשי של האתר -->
+    <div class="main-content" id="mainContent">
+        <button class="logout-btn" id="logoutBtn">התנתק</button>
+        
+        <h1 class="welcome-header">ברוכים הבאים לאתר שלנו!</h1>
+        
+        <!-- תפריט ניווט -->
+        <div class="nav-menu">
+            <button class="nav-btn active" onclick="showPage('home')">בית</button>
+            <button class="nav-btn" onclick="showPage('about')">אודות</button>
+            <button class="nav-btn" onclick="showPage('services')">שירותים</button>
+            <button class="nav-btn" onclick="showPage('contact')">צור קשר</button>
+        </div>
+        
+        <!-- תוכן עמוד בית -->
+        <div id="home" class="page-content active">
+            <div class="content-section">
+                <h2>ברוכים הבאים לעמוד הבית</h2>
+                <p>כאן תוכל להוסיף את התוכן הראשי של האתר שלך. זה המקום המושלם להציג מידע חשוב, חדשות, או כל תוכן אחר שרצונך שהמבקרים יראו מיד כשהם נכנסים לאתר.</p>
+            </div>
+        </div>
+        
+        <!-- תוכן עמוד אודות -->
+        <div id="about" class="page-content">
+            <div class="content-section">
+                <h2>אודות האתר</h2>
+                <p>כאן תוכל לכתוב על האתר, המטרה שלו, מי אתה ומה הוא מציע. ספר על הרקע, החזון והמטרות של האתר או הארגון.</p>
+            </div>
+        </div>
+        
+        <!-- תוכן עמוד שירותים -->
+        <div id="services" class="page-content">
+            <div class="content-section">
+                <h2>השירותים שלנו</h2>
+                <p>כאן תוכל לפרט את השירותים או המוצרים שאתה מציע. תאר כל שירות בפירוט ונסה להסביר איך הוא יכול לעזור למבקרים באתר.</p>
+            </div>
+        </div>
+        
+        <!-- תוכן עמוד צור קשר -->
+        <div id="contact" class="page-content">
+            <div class="content-section">
+                <h2>צור קשר</h2>
+                <p>
+                    <strong>טלפון:</strong> 03-1234567<br>
+                    <strong>אימייל:</strong> info@example.com<br>
+                    <strong>כתובת:</strong> רחוב הדוגמה 123, תל אביב<br><br>
+                    מוזמנים ליצור קשר בכל שאלה או בקשה!
+                </p>
+            </div>
+        </div>
+    </div>
 
+    <script>
+        // שנה את פרטי ההתחברות כאן
+        const validCredentials = {
+            'admin': 'password123',
+            'מנהל': 'סיסמה456',
+            'משתמש': 'קוד789'
+        };
+
+        // קבלת אלמנטים
+        const loginForm = document.getElementById('loginFormElement');
+        const loginContainer = document.getElementById('loginForm');
+        const mainContent = document.getElementById('mainContent');
+        const errorMessage = document.getElementById('errorMessage');
+        const successMessage = document.getElementById('successMessage');
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // בדיקה אם המשתמש כבר מחובר
+        if (sessionStorage.getItem('loggedIn') === 'true') {
+            showMainContent();
+        }
+
+        // טיפול בשליחת הטופס
+        loginForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            // בדיקת פרטי ההתחברות
+            if (validCredentials[username] && validCredentials[username] === password) {
+                // התחברות מצליחה
+                successMessage.style.display = 'block';
+                errorMessage.style.display = 'none';
+                
+                // שמירת מצב ההתחברות
+                sessionStorage.setItem('loggedIn', 'true');
+                sessionStorage.setItem('username', username);
+                
+                // מעבר לתוכן הראשי אחרי שנייה
+                setTimeout(() => {
+                    showMainContent();
+                }, 1000);
+                
+            } else {
+                // התחברות נכשלה
+                errorMessage.style.display = 'block';
+                successMessage.style.display = 'none';
+                
+                // נקה את השדות
+                document.getElementById('password').value = '';
+            }
+        });
+
+        // פונקציה להצגת התוכן הראשי
+        function showMainContent() {
+            loginContainer.style.display = 'none';
+            mainContent.style.display = 'block';
+        }
+
+        // פונקציה להתנתקות
+        logoutBtn.addEventListener('click', function() {
+            sessionStorage.removeItem('loggedIn');
+            sessionStorage.removeItem('username');
+            
+            loginContainer.style.display = 'block';
+            mainContent.style.display = 'none';
+            
+            // נקה את הטופס
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            errorMessage.style.display = 'none';
+            successMessage.style.display = 'none';
+        });
+
+        // פונקציה למעבר בין עמודים
+        function showPage(pageId) {
+            // הסתר את כל העמודים
+            const pages = document.querySelectorAll('.page-content');
+            pages.forEach(page => page.classList.remove('active'));
+            
+            // הסר את הקלאס active מכל הכפתורים
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // הצג את העמוד הנבחר
+            document.getElementById(pageId).classList.add('active');
+            
+            // הוסף קלאס active לכפתור הנבחר
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
