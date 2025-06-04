@@ -231,6 +231,155 @@
             text-transform: uppercase;
         }
         
+        .enter-class {
+            margin-top: 10px;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .back-btn {
+            background: #95a5a6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        .back-btn:hover {
+            background: #7f8c8d;
+        }
+        
+        .class-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px;
+        }
+        
+        .class-header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .materials-section {
+            margin-bottom: 30px;
+        }
+        
+        .materials-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .material-item {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .material-item h3 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        
+        .material-item ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .material-item li {
+            margin-bottom: 8px;
+        }
+        
+        .material-item a {
+            color: #667eea;
+            text-decoration: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            display: block;
+            transition: background 0.3s ease;
+        }
+        
+        .material-item a:hover {
+            background: #f0f3ff;
+            color: #5a6fd8;
+        }
+        
+        .assignments-section h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 24px;
+            border-bottom: 2px solid #e74c3c;
+            padding-bottom: 10px;
+        }
+        
+        .assignment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .assignment-item {
+            background: white;
+            border: 1px solid #e1e8ed;
+            border-radius: 8px;
+            padding: 15px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .assignment-item strong {
+            color: #333;
+        }
+        
+        .assignment-item p {
+            margin: 5px 0;
+            color: #666;
+        }
+        
+        .status {
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        
+        .status.pending {
+            background: #f39c12;
+            color: white;
+        }
+        
+        .status.upcoming {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .status.completed {
+            background: #27ae60;
+            color: white;
+        }
+        
         @media (max-width: 768px) {
             .nav-menu {
                 flex-direction: column;
@@ -244,6 +393,16 @@
             
             .classes-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .assignment-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
             }
         }
     </style>
@@ -306,58 +465,67 @@
             <div class="content-section">
                 <h2>רשימת הכיתות</h2>
                 <div class="classes-grid">
-                    <div class="class-card">
-                        <h3>כיתה א'</h3>
+                    <div class="class-card" onclick="showClassPage('grade1')">
+                        <h3>כיתה א'1</h3>
                         <p>שלב ההכרות עם עולם הלימודים - קריאה, כתיבה, חשבון ועוד</p>
                         <span class="grade-level">בסיסי</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ב'</h3>
+                    <div class="class-card" onclick="showClassPage('grade2')">
+                        <h3>כיתה ב'1</h3>
                         <p>המשך פיתוח כישורי הבסיס והרחבת הידע</p>
                         <span class="grade-level">בסיסי</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ג'</h3>
+                    <div class="class-card" onclick="showClassPage('grade3')">
+                        <h3>כיתה ג'1</h3>
                         <p>חיזוק היסודות ופיתוח חשיבה עצמאית</p>
                         <span class="grade-level">יסודי א'</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ד'</h3>
+                    <div class="class-card" onclick="showClassPage('grade4')">
+                        <h3>כיתה ד'1</h3>
                         <p>העמקת הלימודים ופיתוח כישורי חקר</p>
                         <span class="grade-level">יסודי א'</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ה'</h3>
+                    <div class="class-card" onclick="showClassPage('grade5')">
+                        <h3>כיתה ה'1</h3>
                         <p>הכנה למעבר לחטיבת הביניים</p>
                         <span class="grade-level">יסודי ב'</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ו'</h3>
+                    <div class="class-card" onclick="showClassPage('grade6')">
+                        <h3>כיתה ו'1</h3>
                         <p>סיום החטיבה היסודית והכנה לאתגרים חדשים</p>
                         <span class="grade-level">יסודי ב'</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ז'</h3>
+                    <div class="class-card" onclick="showClassPage('grade7')">
+                        <h3>כיתה ז'1</h3>
                         <p>תחילת חטיבת הביניים - הרחבת אופקים</p>
                         <span class="grade-level">חט"ב</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ח'</h3>
+                    <div class="class-card" onclick="showClassPage('grade8')">
+                        <h3>כיתה ח'1</h3>
                         <p>העמקת הלימודים והכנה לכיתה ט'</p>
                         <span class="grade-level">חט"ב</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                     
-                    <div class="class-card">
-                        <h3>כיתה ט'</h3>
+                    <div class="class-card" onclick="showClassPage('grade9')">
+                        <h3>כיתה ט'1</h3>
                         <p>סיום חטיבת הביניים והכנה לחטיבה העליונה</p>
                         <span class="grade-level">חט"ב</span>
+                        <div class="enter-class">כנס לכיתה →</div>
                     </div>
                 </div>
             </div>
@@ -391,6 +559,106 @@
                 </p>
             </div>
         </div>
+        
+        <!-- עמודי כיתות -->
+        <div id="grade1" class="page-content">
+            <button class="back-btn" onclick="showPage('home')">← חזור לעמוד הבית</button>
+            <div class="class-header">
+                <h1>כיתה א'1</h1>
+                <p>מחנכת: גב' שרה כהן | שנת לימודים: 2025</p>
+            </div>
+            
+            <div class="materials-section">
+                <h2>חומרי לימוד</h2>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <h3>📚 עברית</h3>
+                        <ul>
+                            <li><a href="#" onclick="openMaterial('אותיות א-ת')">אותיות א-ת</a></li>
+                            <li><a href="#" onclick="openMaterial('קריאה בסיסית')">קריאה בסיסית</a></li>
+                            <li><a href="#" onclick="openMaterial('כתיבה ראשונה')">כתיבה ראשונה</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="material-item">
+                        <h3>🔢 מתמטיקה</h3>
+                        <ul>
+                            <li><a href="#" onclick="openMaterial('מספרים 1-10')">מספרים 1-10</a></li>
+                            <li><a href="#" onclick="openMaterial('חיבור וחיסור')">חיבור וחיסור</a></li>
+                            <li><a href="#" onclick="openMaterial('תרגילים')">תרגילים</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="material-item">
+                        <h3>🌍 הכרת הסביבה</h3>
+                        <ul>
+                            <li><a href="#" onclick="openMaterial('המשפחה שלי')">המשפחה שלי</a></li>
+                            <li><a href="#" onclick="openMaterial('החגים')">החגים</a></li>
+                            <li><a href="#" onclick="openMaterial('בעלי חיים')">בעלי חיים</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="material-item">
+                        <h3>🎨 יצירה</h3>
+                        <ul>
+                            <li><a href="#" onclick="openMaterial('ציור וצביעה')">ציור וצביעה</a></li>
+                            <li><a href="#" onclick="openMaterial('יצירות חג')">יצירות חג</a></li>
+                            <li><a href="#" onclick="openMaterial('עבודות יד')">עבודות יד</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="assignments-section">
+                <h2>שיעורי בית ומבחנים</h2>
+                <div class="assignment-list">
+                    <div class="assignment-item">
+                        <strong>תאריך הגשה: 15/06/2025</strong>
+                        <p>תרגיל קריאה - עמודים 12-15</p>
+                        <span class="status pending">ממתין</span>
+                    </div>
+                    <div class="assignment-item">
+                        <strong>תאריך מבחן: 20/06/2025</strong>
+                        <p>מבחן במתמטיקה - חיבור וחיסור</p>
+                        <span class="status upcoming">קרוב</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- כיתה ב'1 -->
+        <div id="grade2" class="page-content">
+            <button class="back-btn" onclick="showPage('home')">← חזור לעמוד הבית</button>
+            <div class="class-header">
+                <h1>כיתה ב'1</h1>
+                <p>מחנכת: גב' רחל לוי | שנת לימודים: 2025</p>
+            </div>
+            
+            <div class="materials-section">
+                <h2>חומרי לימוד</h2>
+                <div class="materials-grid">
+                    <div class="material-item">
+                        <h3>📚 עברית</h3>
+                        <ul>
+                            <li><a href="#" onclick="openMaterial('קריאה בהבנה')">קריאה בהבנה</a></li>
+                            <li><a href="#" onclick="openMaterial('דקדוק בסיסי')">דקדוק בסיסי</a></li>
+                            <li><a href="#" onclick="openMaterial('חיבור ראשון')">חיבור ראשון</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="material-item">
+                        <h3>🔢 מתמטיקה</h3>
+                        <ul>
+                            <li><a href="#" onclick="openMaterial('מספרים עד 100')">מספרים עד 100</a></li>
+                            <li><a href="#" onclick="openMaterial('כפל ראשון')">כפל ראשון</a></li>
+                            <li><a href="#" onclick="openMaterial('בעיות מילוליות')">בעיות מילוליות</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- כיתות נוספות יתווספו כאן באופן דומה -->
     </div>
 
     <script>
@@ -480,8 +748,35 @@
             // הצג את העמוד הנבחר
             document.getElementById(pageId).classList.add('active');
             
-            // הוסף קלאס active לכפתור הנבחר
-            event.target.classList.add('active');
+            // הוסף קלאס active לכפתור הנבחר אם זה לא עמוד כיתה
+            if (['home', 'about', 'services', 'contact'].includes(pageId)) {
+                const activeBtn = Array.from(buttons).find(btn => 
+                    btn.textContent.includes(getPageName(pageId))
+                );
+                if (activeBtn) activeBtn.classList.add('active');
+            }
+        }
+        
+        // פונקציה להצגת עמוד כיתה
+        function showClassPage(classId) {
+            showPage(classId);
+        }
+        
+        // פונקציה להצגת חומר לימוד
+        function openMaterial(materialName) {
+            alert(`פותח חומר לימוד: ${materialName}\n\nכאן תוכל להוסיף קישור לקובץ PDF, מצגת, או כל חומר אחר.`);
+            // כאן תוכל להוסיף קוד לפתיחת קבצים אמיתיים
+        }
+        
+        // פונקציה עזר לקבלת שם העמוד
+        function getPageName(pageId) {
+            const pageNames = {
+                'home': 'בית',
+                'about': 'אודות',
+                'services': 'שירותים',
+                'contact': 'צור קשר'
+            };
+            return pageNames[pageId] || '';
         }
     </script>
 </body>
